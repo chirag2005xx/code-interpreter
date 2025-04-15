@@ -6,7 +6,15 @@ const LevelSelect = () => {
 
   const handleLevelSelect = (level) => {
     localStorage.setItem('userLevel', level); // store the selected level
-    navigate('/dashboard'); // move to dashboard
+    console.log("Selected Level:", level);  // Debugging line
+
+    if (level === 'Beginner') {
+      navigate('/basic-dashboard');
+    } else if (level === 'Intermediate') {
+      navigate('/intermediate-dashboard');
+    } else if (level === 'Advanced') {
+      navigate('/advanced-dashboard');
+    }
   };
 
   return (
