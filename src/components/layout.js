@@ -5,7 +5,7 @@ const Layout = ({ children }) => {
   return (
     <div className="app-container">
       <header className="header">
-        <h1 className="header-title">Your App</h1>
+        <h1 className="header-title">PyBuddy</h1>
       </header>
       
       <div className="workspace">

@@ -11,7 +11,7 @@ function Login() {
     e.preventDefault();
 
     // Dummy login validation (replace this with actual auth later)
-    if (username === 'test' && password === '1234') {
+    if (username === 'main@mail.com' && password === '1234') {
       // Navigate to level select after login
       navigate('/levelselect');
     } else {

@@ -3,6 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+window.addEventListener('error', function(e) {
+  if (e.message.includes('ResizeObserver') || 
+      e.error && e.error.message.includes('ResizeObserver')) {
+    e.stopImmediatePropagation();
+    e.preventDefault();
+    return true;
+  }
+});
 // Handle ResizeObserver errors
 const originalConsoleError = console.error;
 console.error = (...args) => {

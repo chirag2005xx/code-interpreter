@@ -30,7 +30,7 @@ const IntermediateDashboard = () => {
       <h1 className="text-3xl font-bold mb-6">Welcome, {userName}!</h1>
 
       <div className="profile-info mb-6 flex items-center space-x-4">
-        <img src={`./avatars/${userAvatar}`} alt="Avatar" className="w-16 h-16 rounded-full" />
+        
         <div>
           <h2 className="text-xl">{userName}</h2>
           <p>Level: {userLevel}</p>
