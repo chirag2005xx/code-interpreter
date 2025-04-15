@@ -32,9 +32,10 @@ function App() {
           element={<Layout><LevelSelect /></Layout>} 
         />
         <Route 
-          path="/editor" 
-          element={<Layout><CodeEditorPage /></Layout>} 
-        />
+  path="/code-editor" 
+  element={<Layout><CodeEditorPage /></Layout>} 
+/>
+
         <Route 
           path="/basic-dashboard" 
           element={<Layout><BasicDashboard /></Layout>} 
