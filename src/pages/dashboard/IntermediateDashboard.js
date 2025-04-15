@@ -7,7 +7,7 @@ const IntermediateDashboard = () => {
 
   const userLevel = localStorage.getItem('userLevel');
   const userName = localStorage.getItem('userName') || 'Guest';
-  const userAvatar = localStorage.getItem('userAvatar') || 'default-avatar.png';
+  const userAvatar = localStorage.getItem('userAvatar') || 'default.jpg';
 
   const [xpPoints, setXpPoints] = useState(100);
   const [badges, setBadges] = useState(['Pro Coder']);

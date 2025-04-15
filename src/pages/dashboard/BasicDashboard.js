@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 const BasicDashboard = () => {
   const userLevel = localStorage.getItem('userLevel');
   const userName = localStorage.getItem('userName') || 'Guest';
-  const userAvatar = localStorage.getItem('userAvatar') || 'default-avatar.png';
+  const userAvatar = localStorage.getItem('userAvatar') || 'default.jpg';
 
   const [xpPoints] = useState(50);
   const [badges] = useState(['🎯 First Steps']);
@@ -12,6 +12,7 @@ const BasicDashboard = () => {
   const [challenges, setChallenges] = useState([]);
 
   const navigate = useNavigate(); // Initialize navigate
+
 
   useEffect(() => {
     // Fetch challenges based on user level
