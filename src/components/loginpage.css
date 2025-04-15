@@ -1,0 +1,161 @@
+/* Login Page - Modern Style */
+:root {
+    --primary-color: #4285f4;
+    --primary-hover: #3367d6;
+    --success-color: #34a853;
+    --warning-color: #fbbc05;
+    --error-color: #ea4335;
+    --dark-bg: #1e1e2e;
+    --darker-bg: #181825;
+    --light-bg: #f8f9fa;
+    --gray-100: #f1f3f4;
+    --gray-200: #e8eaed;
+    --gray-800: #3c4043;
+    --gray-900: #202124;
+    --border-radius: 8px;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --font-sans: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    --transition-base: all 0.2s ease;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--light-bg);
+    color: var(--gray-900);
+    line-height: 1.6;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    transition: var(--transition-base);
+  }
+  
+  /* Login Page Styles */
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--light-bg);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .login-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 32px;
+    box-shadow: var(--shadow-sm);
+    width: 400px;
+    max-width: 100%;
+  }
+  
+  .login-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  .login-header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 10px;
+  }
+  
+  .login-header p {
+    font-size: 1rem;
+    color: var(--gray-600);
+  }
+  
+  /* Input Styles */
+  .input-field {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    color: var(--gray-900);
+  }
+  
+  .input-field:focus {
+    border-color: var(--primary-color);
+    outline: none;
+  }
+  
+  .input-field::placeholder {
+    color: var(--gray-600);
+  }
+  
+  /* Button Styles */
+  .button {
+    width: 100%;
+    padding: 12px;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-base);
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  .button:hover {
+    background-color: var(--primary-hover);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .button:active {
+    transform: translateY(1px);
+  }
+  
+  .forgot-password {
+    font-size: 0.875rem;
+    color: var(--primary-color);
+    text-align: center;
+    display: block;
+    margin-top: 12px;
+    cursor: pointer;
+  }
+  
+  .forgot-password:hover {
+    text-decoration: underline;
+  }
+  
+  /* Dark Mode Support */
+  body.dark-mode {
+    background-color: var(--darker-bg);
+    color: #e0e0ff;
+  }
+  
+  body.dark-mode .login-card {
+    background-color: var(--dark-bg);
+    color: #e0e0ff;
+    box-shadow: var(--shadow-md);
+  }
+  
+  body.dark-mode .input-field {
+    background-color: var(--dark-bg);
+    color: #e0e0ff;
+    border: 1px solid var(--gray-600);
+  }
+  
+  body.dark-mode .input-field:focus {
+    border-color: var(--primary-color);
+  }
+  
+  body.dark-mode .button {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  body.dark-mode .button:hover {
+    background-color: var(--primary-hover);
+  }
+  

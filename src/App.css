@@ -1,38 +1,398 @@
-.App {
-  text-align: center;
+/* Modern Code Editor Interface - Professional Version */
+/* Base styling */
+:root {
+  --primary-color: #4285f4;
+  --primary-hover: #3367d6;
+  --success-color: #34a853;
+  --warning-color: #fbbc05;
+  --error-color: #ea4335;
+  --dark-bg: #1e1e2e;
+  --darker-bg: #181825;
+  --light-bg: #f8f9fa;
+  --gray-100: #f1f3f4;
+  --gray-200: #e8eaed;
+  --gray-800: #3c4043;
+  --gray-900: #202124;
+  --border-radius: 8px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  --font-sans: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  --header-height: 64px;
+  --footer-height: 48px;
+  --transition-base: all 0.2s ease;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  font-family: var(--font-sans);
+  background-color: var(--light-bg);
+  color: var(--gray-900);
+  line-height: 1.6;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  transition: var(--transition-base);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* App Container */
+.app-container {
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  background-color: white;
+  height: var(--header-height);
+  border-bottom: 1px solid var(--gray-200);
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  position: relative;
+  padding: 0 24px;
+  box-shadow: var(--shadow-sm);
+  z-index: 10;
+}
+
+.header-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.header-title::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 3px;
+  width: 60px;
+  background: linear-gradient(90deg, var(--primary-color), var(--success-color));
+  border-radius: 3px;
+}
+
+/* Main content - Editor and Output */
+.workspace {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Editor Panel */
+.editor-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--gray-100);
+  border-right: 1px solid var(--gray-200);
+  overflow: hidden;
+}
+
+.editor-header {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: white;
+  border-bottom: 1px solid var(--gray-200);
+  height: 40px;
+}
+
+.editor-tab {
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-800);
+  background-color: var(--gray-100);
+  border-radius: 4px 4px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.editor-tab-icon {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+.editor-tab-icon.python {
+  background-color: #3572A5;
+}
+
+.editor-container {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  background-color: white;
+  overflow: hidden;
+}
+
+/* Code Editor (assuming Monaco or CodeMirror) */
+.code-editor {
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Output Panel */
+.output-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--gray-100);
+  overflow: hidden;
+  max-width: 40%;
+}
+
+.output-header {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: white;
+  border-bottom: 1px solid var(--gray-200);
+  height: 40px;
+}
+
+.output-tab {
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-800);
+  background-color: var(--gray-100);
+  border-radius: 4px 4px 0 0;
+}
+
+.console-output {
+  flex: 1;
+  padding: 16px;
+  background-color: white;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.console-line {
+  margin: 4px 0;
+  padding: 2px 0;
+  transition: var(--transition-base);
+}
+
+.console-line.error {
+  color: var(--error-color);
+  background-color: rgba(234, 67, 53, 0.05);
+  padding: 4px 8px;
+  border-radius: 4px;
+  border-left: 3px solid var(--error-color);
+}
+
+.console-line.warning {
+  color: var(--warning-color);
+  background-color: rgba(251, 188, 5, 0.05);
+  padding: 4px 8px;
+  border-radius: 4px;
+  border-left: 3px solid var(--warning-color);
+}
+
+.console-line.success {
+  color: var(--success-color);
+  background-color: rgba(52, 168, 83, 0.05);
+  padding: 4px 8px;
+  border-radius: 4px;
+  border-left: 3px solid var(--success-color);
+}
+
+/* Resizer between panels */
+.panel-resizer {
+  width: 6px;
+  background-color: var(--gray-200);
+  cursor: col-resize;
+  transition: background-color 0.2s;
+}
+
+.panel-resizer:hover {
+  background-color: var(--primary-color);
+}
+
+/* Footer with controls */
+.footer {
+  height: var(--footer-height);
+  background-color: white;
+  border-top: 1px solid var(--gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.footer-stats {
+  font-size: 12px;
+  color: var(--gray-800);
+  margin-right: auto;
+}
+
+/* Buttons */
+.button {
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition-base);
+  background-color: white;
+  color: var(--gray-800);
+  border: 1px solid var(--gray-200);
+}
+
+.button-primary {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+.button-primary:hover {
+  background-color: var(--primary-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+.button-success {
+  background-color: var(--success-color);
+  color: white;
+  border: none;
+}
+
+.button-success:hover {
+  background-color: #2d9549;
+  box-shadow: var(--shadow-sm);
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background-color: var(--darker-bg);
+  color: #e0e0ff;
+}
+
+body.dark-mode .header,
+body.dark-mode .editor-header,
+body.dark-mode .output-header,
+body.dark-mode .footer {
+  background-color: var(--dark-bg);
+  border-color: #2a2a3c;
+  color: #e0e0ff;
+}
+
+body.dark-mode .editor-panel,
+body.dark-mode .output-panel {
+  background-color: var(--darker-bg);
+  border-color: #2a2a3c;
+}
+
+body.dark-mode .editor-tab,
+body.dark-mode .output-tab {
+  background-color: #2a2a3c;
+  color: #b8b8d0;
+}
+
+body.dark-mode .editor-container,
+body.dark-mode .console-output {
+  background-color: var(--dark-bg);
+  color: #e0e0ff;
+}
+
+body.dark-mode .panel-resizer {
+  background-color: #2a2a3c;
+}
+
+body.dark-mode .panel-resizer:hover {
+  background-color: var(--primary-color);
+}
+
+body.dark-mode .button {
+  background-color: #2a2a3c;
+  color: #e0e0ff;
+  border-color: #3a3a4c;
+}
+
+body.dark-mode .button-primary {
+  background-color: var(--primary-color);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+body.dark-mode .button-success {
+  background-color: var(--success-color);
+  color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+body.dark-mode .console-line.error {
+  background-color: rgba(234, 67, 53, 0.1);
+}
+
+body.dark-mode .console-line.warning {
+  background-color: rgba(251, 188, 5, 0.1);
+}
+
+body.dark-mode .console-line.success {
+  background-color: rgba(52, 168, 83, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .workspace {
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .editor-panel,
+  .output-panel {
+    max-width: none;
+    width: 100%;
+    flex: none;
+    height: 50%;
   }
+  
+  .panel-resizer {
+    width: 100%;
+    height: 6px;
+    cursor: row-resize;
+  }
+}
+
+/* Animation for console messages */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.console-line {
+  animation: fadeIn 0.2s ease-out forwards;
 }
