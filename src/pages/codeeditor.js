@@ -37,15 +37,42 @@ function CodeEditorPage({ username }) {
       setOutput([...output, { type: 'stderr', message: 'Pyodide is still loading, please wait...' }]);
       return;
     }
-
+  
     try {
       setOutput([{ type: 'info', message: 'Running your Python code...' }]);
+      
+      // Capture stdout
+      let stdoutCapture = [];
+      pyodideInstance.globals.set("print_capture", (text) => {
+        stdoutCapture.push(text);
+      });
+      
+      // Redirect Python's print to our capture function
+      await pyodideInstance.runPythonAsync(`
+        import sys
+        
+        class StdoutCatcher:
+            def write(self, text):
+                print_capture(text)
+            def flush(self):
+                pass
+        
+        sys.stdout = StdoutCatcher()
+      `);
+      
+      // Run the user's code
       const result = await pyodideInstance.runPythonAsync(input);
-      const resultStr = result !== undefined ? String(result) : 'undefined';
-      setOutput(prev => [...prev, { type: 'stdout', message: resultStr }]);
+      
+      // Display both stdout and return value
+      const resultStr = result !== undefined ? String(result) : '';
+      setOutput(prev => [
+        ...prev, 
+        ...stdoutCapture.map(text => ({ type: 'stdout', message: text.trim() })),
+        ...(resultStr ? [{ type: 'stdout', message: resultStr }] : [])
+      ]);
     } catch (error) {
       const errMsg = error.message || "Unknown Error";
-
+  
       let suggestion = "";
       if (errMsg.includes("NameError")) {
         suggestion = "🔍 Tip: Did you forget to define a variable or misspell it?";
@@ -54,13 +81,13 @@ function CodeEditorPage({ username }) {
       } else if (errMsg.includes("TypeError")) {
         suggestion = "🔧 Tip: You might be using the wrong data type for an operation.";
       } else if (errMsg.includes("IndexError")) {
-        suggestion = "📏 Tip: Looks like you're trying to access an index that doesn’t exist.";
+        suggestion = "📏 Tip: Looks like you're trying to access an index that doesn't exist.";
       } else if (errMsg.includes("ImportError")) {
         suggestion = "📦 Tip: Did you forget to import a required package?";
       } else if (errMsg.includes("IndentationError")) {
         suggestion = "⎵ Tip: Python is picky about indentation! Make sure everything lines up properly.";
       }
-
+  
       setOutput(prev => [
         ...prev,
         { type: 'stderr', message: errMsg },

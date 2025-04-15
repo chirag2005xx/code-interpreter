@@ -3,6 +3,32 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// Handle ResizeObserver errors
+const originalConsoleError = console.error;
+console.error = (...args) => {
+  if (args[0] && typeof args[0] === 'string' && args[0].includes('ResizeObserver loop')) {
+    return;
+  }
+  originalConsoleError(...args);
+};
+
+if (typeof ResizeObserver !== 'undefined') {
+  // Create a safer version of ResizeObserver
+  const originalResizeObserver = window.ResizeObserver;
+  window.ResizeObserver = class SafeResizeObserver extends originalResizeObserver {
+    constructor(callback) {
+      super((entries, observer) => {
+        try {
+          callback(entries, observer);
+        } catch (e) {
+          if (!e.message.includes('ResizeObserver loop')) {
+            throw e;
+          }
+        }
+      });
+    }
+  };
+}
 
 // Add this to the top of your index.js file
 const origErrorFunc = window.console.error;
