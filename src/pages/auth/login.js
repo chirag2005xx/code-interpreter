@@ -21,24 +21,32 @@ function Login() {
 
   return (
     <div className="login-container">
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <input 
-          type="text" 
-          placeholder="Username" 
-          value={username} 
-          onChange={(e) => setUsername(e.target.value)} 
-        />
-        <input 
-          type="password" 
-          placeholder="Password" 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
-        />
-        <button type="submit">Login</button>
-      </form>
+      <div className="login-card">
+        <div className="login-header">
+          <h1>Welcome Back!</h1>
+          <p>Please log in to continue</p>
+        </div>
+        <form onSubmit={handleLogin}>
+          <input 
+            type="text" 
+            className="input-field" 
+            placeholder="Username" 
+            value={username} 
+            onChange={(e) => setUsername(e.target.value)} 
+          />
+          <input 
+            type="password" 
+            className="input-field" 
+            placeholder="Password" 
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)} 
+          />
+          <button type="submit" className="button">Login</button>
+        </form>
+        <a href="#" className="forgot-password">Forgot Password?</a>
+      </div>
     </div>
   );
 }
 
-export default Login;  // Exporting the correct component name with a capital 'L'
+export default Login;

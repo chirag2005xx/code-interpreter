@@ -18,18 +18,24 @@ const LevelSelect = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
-      <h1 className="text-3xl font-bold mb-6">Select Your Level</h1>
-      <div className="space-y-4">
-        {['Beginner', 'Intermediate', 'Advanced'].map((level) => (
-          <button
-            key={level}
-            onClick={() => handleLevelSelect(level)}
-            className="bg-blue-600 px-6 py-2 rounded-lg text-lg hover:bg-blue-700"
-          >
-            {level}
-          </button>
-        ))}
+    <div className="level-select-container">
+      <h1 className="level-select-title">Select Your Level</h1>
+      <div className="level-box-container">
+        <div className="level-box">
+          <h3>Beginner</h3>
+          <p>Start your journey with the basics of coding.</p>
+          <button className="button button-primary" onClick={() => handleLevelSelect('Beginner')}>Start</button>
+        </div>
+        <div className="level-box">
+          <h3>Intermediate</h3>
+          <p>Take your skills to the next level with intermediate challenges.</p>
+          <button className="button button-primary" onClick={() => handleLevelSelect('Intermediate')}>Start</button>
+        </div>
+        <div className="level-box">
+          <h3>Advanced</h3>
+          <p>Master your skills with advanced-level problems.</p>
+          <button className="button button-primary" onClick={() => handleLevelSelect('Advanced')}>Start</button>
+        </div>
       </div>
     </div>
   );
