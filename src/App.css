@@ -10,7 +10,6 @@
   --darker-bg: #181825;
   --light-bg: #f8f9fa;
   --gray-100: #f1f3f4;
-  --gradient-bg: linear-gradient(135deg, #4285f4, #34a853, #fbbc05, #ea4335);
   --gray-200: #e8eaed;
   --gray-800: #3c4043;
   --gray-900: #202124;
@@ -72,6 +71,12 @@ body {
   position: relative;
   padding-bottom: 4px;
 }
+body {
+  overflow-x: hidden;
+}
+.app-container {
+  overflow: hidden;
+}
 
 .header-title::after {
   content: '';
@@ -92,6 +97,11 @@ body {
   overflow: hidden;
   position: relative;
 }
+.editor-container {
+  height: calc(100vh - 180px); /* Adjust based on your layout */
+  overflow: hidden;
+  position: relative;
+}
 
 /* Editor Panel */
 .editor-panel {
@@ -102,6 +112,7 @@ body {
   border-right: 1px solid var(--gray-200);
   overflow: hidden;
 }
+
 
 .editor-header {
   display: flex;

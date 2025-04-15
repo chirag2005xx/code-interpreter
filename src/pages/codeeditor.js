@@ -82,11 +82,14 @@ function CodeEditorPage({ username }) {
 
       <main className="workspace">
         <div className="editor-panel">
-          <div className="editor-header">
+          <div className="editor-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div className="editor-tab">
               <span className="editor-tab-icon python"></span>
               <span>main.py</span>
             </div>
+            <button onClick={handleRun} className="button button-success run-button-top">
+              ▶ Run
+            </button>
           </div>
           <div className="editor-container">
             <Editor
@@ -135,13 +138,6 @@ function CodeEditorPage({ username }) {
         <div className="footer-stats">
           <span>{lineCount} lines</span> | <span>{charCount} characters</span>
         </div>
-        <button onClick={handleRun} className="button button-success">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-          </svg>
-          Run Python
-        </button>
         <button onClick={toggleDarkMode} className="button">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
